@@ -2,29 +2,21 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ChatDTO {
-  id: ID!
-  users: [UserDTO!]!
-  messages: [MessageDTO!]
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type UserDTO {
+  chats: [ChatDTO!]
   id: ID!
   username: String!
   status: String
   image_base64: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  chats: [ChatDTO!]
   online: Boolean!
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type MessageDTO {
   id: ID!
@@ -34,13 +26,30 @@ type MessageDTO {
   updatedAt: DateTime!
 }
 
+type ChatDTO {
+  id: ID!
+  members: [NoChatsUserDTO!]!
+  messages: [MessageDTO!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type NoChatsUserDTO {
+  id: ID!
+  username: String!
+  status: String
+  image_base64: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
-  chat(id: Int!): [ChatDTO!]!
-  findAllUserDTO: [UserDTO!]!
   user(id: Int!): UserDTO!
+  findUser(username: String!): [NoChatsUserDTO!]!
+  allUsers: [NoChatsUserDTO!]!
 }
 
 type Mutation {
-  createChat(id: [Int!]!): ChatDTO!
+  createChat(client_ids: [Int!]!): ChatDTO!
   cerateUser(username: String!, status: String!, image_base64: String!): UserDTO!
 }

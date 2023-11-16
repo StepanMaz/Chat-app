@@ -7,18 +7,15 @@ import {
   Parent,
   Mutation,
 } from '@nestjs/graphql';
-import { UserDTO } from 'src/DTOs/users';
+import { NoChatsUserDTO, UserDTO } from 'src/DTOs';
 import { UsersService, UserDataService } from 'src/services';
-import { BaseResolver } from './base.resolver';
 
 @Resolver((of) => UserDTO)
-export class UsersResolver extends BaseResolver(UserDTO) {
+export class UsersResolver {
   constructor(
     private readonly user_service: UsersService,
     private readonly userdata_service: UserDataService,
-  ) {
-    super();
-  }
+  ) {}
 
   @Query((returns) => UserDTO, { name: 'user' })
   async getUser(
@@ -45,5 +42,15 @@ export class UsersResolver extends BaseResolver(UserDTO) {
       image_base64,
     });
     return user;
+  }
+
+  @Query((returns) => [NoChatsUserDTO])
+  async findUser(@Args('username') username: string) {
+    return this.user_service.find(username);
+  }
+
+  @Query((returns) => [NoChatsUserDTO])
+  allUsers() {
+    return this.user_service.getAll();
   }
 }

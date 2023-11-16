@@ -32,7 +32,7 @@ export class User extends BaseEntity implements UserData {
   @OneToMany(() => Message, (message) => message.user)
   public messages: Message[];
 
-  @ManyToMany(() => Chat, (chat) => chat.users)
+  @ManyToMany(() => Chat, (chat) => chat.members)
   @JoinTable()
   public chats: Chat[];
 

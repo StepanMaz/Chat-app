@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User, UserData } from 'src/entities/user';
-import { In, Repository } from 'typeorm';
+import { In, Like, Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
@@ -19,7 +19,7 @@ export class UsersService {
   }
 
   get(id: number) {
-    return this.users_repo.findOne({ where: { id } });
+    return this.users_repo.findOne({ where: { id }, relations: ['chats'] });
   }
 
   getFormArray(ids: number[]) {
@@ -28,6 +28,10 @@ export class UsersService {
 
   getAll() {
     return this.users_repo.find();
+  }
+
+  async find(username: string) {
+    return this.users_repo.find({ where: { username: Like(`%${username}%`) } });
   }
 
   async update(id: number, data: Partial<UserData>) {

@@ -1,8 +1,11 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { ChatDTO } from './chatDTO';
+import { ChatDTO } from '.';
 
 @ObjectType()
 export class UserDTO {
+  @Field((type) => [ChatDTO], { nullable: true })
+  public chats: ChatDTO[];
+
   @Field(() => ID)
   public id: number;
 
@@ -20,7 +23,4 @@ export class UserDTO {
 
   @Field()
   public updatedAt: Date;
-
-  @Field((type) => [ChatDTO], { nullable: true })
-  public chats: ChatDTO[];
 }

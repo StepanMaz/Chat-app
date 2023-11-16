@@ -1,13 +1,13 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { UserDTO, MessageDTO } from '.';
+import { NoChatsUserDTO, MessageDTO } from '.';
 
 @ObjectType()
 export class ChatDTO {
   @Field(() => ID)
   public id: number;
 
-  @Field((type) => [UserDTO])
-  public users: UserDTO[];
+  @Field((type) => [NoChatsUserDTO])
+  public members: NoChatsUserDTO[];
 
   @Field((type) => [MessageDTO], { nullable: true })
   public messages: MessageDTO[];

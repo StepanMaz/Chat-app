@@ -31,7 +31,7 @@ export class ChatGateway {
   ) {}
 
   handleConnection(client: Socket) {
-    this.logger.debug(`New game gateway connection id: ${client.id}`);
+    this.logger.debug(`New connection id: ${client.id}`);
 
     this.userdata_service.setOnline(
       (client.handshake.auth as AuthData).client_id,

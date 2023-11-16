@@ -1,6 +1,5 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { ChatDTO, MessageDTO } from 'src/DTOs/users';
-import { BaseResolver } from './base.resolver';
+import { ChatDTO } from 'src/DTOs';
 import { ChatsService } from 'src/services/chat.service';
 import { UsersService } from 'src/services';
 
@@ -11,13 +10,9 @@ export class ChatResolver {
     private readonly users_service: UsersService,
   ) {}
 
-  @Query((returns) => [ChatDTO], { name: 'chat' })
-  async forUser(@Args('id', { type: () => Int }) id: number) {
-    return (await this.users_service.get(id)).chats;
-  }
-
   @Mutation((returns) => ChatDTO)
   async createChat(@Args('client_ids', { type: () => [Int] }) ids: number[]) {
+    console.log(ids);
     const users = await this.users_service.getFormArray(ids);
     return this.chats_service.createChat(users);
   }

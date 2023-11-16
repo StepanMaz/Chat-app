@@ -7,10 +7,10 @@ import {
   ManyToMany,
   JoinTable,
   OneToMany,
+  Column,
 } from 'typeorm';
 
-import { User } from './user';
-import { Message } from './message';
+import { Message, User } from '.';
 
 @Entity({
   name: 'chats',
@@ -20,8 +20,7 @@ export class Chat extends BaseEntity {
   public id: number;
 
   @ManyToMany(() => User, (user) => user.chats)
-  @JoinTable()
-  public users: User[];
+  public members: User[];
 
   @OneToMany(() => Message, (message) => message.chat)
   public messages: Message[];

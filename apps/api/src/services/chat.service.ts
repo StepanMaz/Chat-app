@@ -14,12 +14,12 @@ export class ChatsService {
 
   createChat(users: User[]) {
     const chat = new Chat();
-    chat.users = users;
+    chat.members = users;
     return chat.save();
   }
 
   getChat(id: number) {
-    return this.messages_repo.findOne({ where: { id } });
+    return this.chats_repo.findOne({ where: { id } });
   }
 
   addMessage(message: MessageData) {
