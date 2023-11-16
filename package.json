@@ -1,11 +1,19 @@
 {
 	"devDependencies": {
+		"ts-node": "^10.9.1",
 		"turbo": "^1.10.16"
 	},
 	"workspaces": [
-		"apps/*"
+		"apps/*",
+		"packages/shared"
 	],
 	"scripts": {
-		"dev": "turbo run dev"
+		"dev": "turbo run dev",
+		"start": "npm i & npm run services:up & npm run start:prod",
+		"start:prod": "echo \"should be implemented\"",
+		"services:up": "docker-compose --env-file .env up -d",
+		"services:down": "docker-compose --env-file .env down",
+		"services:down-clear": "docker-compose --env-file .env down -v",
+		"test": "echo \"should be implemented\""
 	}
 }

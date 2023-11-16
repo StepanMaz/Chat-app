@@ -1,32 +1,34 @@
-export type AuthData = {};
+export type AuthData = {
+	client_id: number;
+};
 export type ServerEvents = {
 	//name: type
 	statusChange: ClientIDPayload & ClientStatusPayload;
-	receiveMessage: ChannelIDPayload & MessagePayload;
-	channelMemebersUpdate: ChannelIDPayload & MembersStatusUpdatePayload;
+	receiveMessage: ChatIDPayload & MessagePayload;
+	channelMemebersUpdate: ChatIDPayload & MembersStatusUpdatePayload;
 };
 export type ClientEvents = {
 	//name: type
-	startTyping: ChannelIDPayload;
-	sendMessage: ChannelIDPayload & MessagePayload;
+	startTyping: ChatIDPayload;
+	sendMessage: ChatIDPayload & MessagePayload;
 };
 
 export type ToSocketIOEvents<T> = {
 	[K in keyof T]: (data: T[K]) => void;
 };
 
-type ID = string | number;
+type ID = number;
 export type ClientStatus = "online";
 export type MemberStatus = "typing";
 // payload types
 type MembersStatusUpdatePayload = {
-	member_statuses: Record<ID, Record<string, StatusPayload<MemberStatus>>>;
+	member_statuses: Record<ID, StatusPayload<MemberStatus>>;
 };
 type ClientStatusPayload = {
 	client_statuses: Record<string, StatusPayload<MemberStatus>>;
 };
 type MessagePayload = { content: string };
 type ClientIDPayload = { client_id: ID };
-type ChannelIDPayload = { channel_id: ID };
+type ChatIDPayload = { chat_id: ID };
 // util types
-type StatusPayload<T extends ID> = Record<T, boolean>;
+type StatusPayload<T extends string | number> = Record<T, boolean>;

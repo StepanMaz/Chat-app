@@ -1,13 +1,16 @@
 {
-	"name": "shared",
+	"name": "client-lib",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"build": "tsc",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
 	"author": "",
-	"license": "ISC"
+	"license": "ISC",
+	"dependencies": {
+		"shared": "*",
+		"socket.io-client": "^4.7.2"
+	}
 }
