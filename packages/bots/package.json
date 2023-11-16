@@ -11,6 +11,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"client-lib": "*"
+		"client-lib": "*",
+		"shared": "*"
 	}
 }
