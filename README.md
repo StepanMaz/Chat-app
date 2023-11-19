@@ -1,5 +1,5 @@
 # Description
-Simple chat app written with **nest.js**, **react**, **typeorm**, **docker-compose**, **postgresql**
+Simple chat app written with **nest.js**, **react**, **typeorm**, **docker-compose**, **postgresql**, **redux**
 
 
 # Instalation
@@ -30,13 +30,4 @@ $ npm start
 
 # development
 $ npm run dev
-
-# porduction mode
-$ npm run start:prod
 ```
-
-# Test
-```
-$ npm run test
-```
-
