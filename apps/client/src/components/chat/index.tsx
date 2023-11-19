@@ -71,6 +71,19 @@ export function Chat() {
 		return member;
 	}
 
+	function sendMessage() {
+		const text = input.current!.value.trim();
+		input.current!.value = "";
+		console.log(text);
+		if (text.length == 0) {
+			return;
+		}
+		connection.emit("sendMessage", {
+			chat_id: chat!.id,
+			content: text,
+		});
+	}
+
 	const state_map = {
 		[LoadingState.Idle]: () => "Choose chat ==>",
 		[LoadingState.Pending]: () => "Loading...",
@@ -87,19 +100,15 @@ export function Chat() {
 							onChange={() =>
 								connection.emit("startTyping", { chat_id: chat!.id })
 							}
+							onKeyDown={(k) => {
+								console.log(1);
+								if (k.key == "Enter") {
+									sendMessage();
+								}
+							}}
 							placeholder="Start chatting!"
 						></input>
-						<button
-							onClick={() => {
-								connection.emit("sendMessage", {
-									chat_id: chat!.id,
-									content: input.current!.value,
-								});
-								input.current!.value = "";
-							}}
-						>
-							Send message
-						</button>
+						<button onClick={sendMessage}>Send message</button>
 					</div>
 				</div>
 			</div>
