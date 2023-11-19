@@ -21,11 +21,7 @@ $ npm run services:down-clear
 
 # Running this app
 ```
-# single command to start everithing right after git clone
-# installs everething
-# generates .env
-# starts services
-# starts app in production mode
+# single command to start everithing right after git clone & npm i
 $ npm start 
 
 # development
