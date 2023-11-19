@@ -9,12 +9,6 @@ export abstract class Bot {
 		connection.on("receiveMessage", (m) => {
 			if (m.userId != bot_info.id) {
 				this.handleMessage(m);
-				console.log(
-					this.constructor.name,
-					"received a message",
-					bot_info,
-					(connection as any).socket.id
-				);
 			}
 		});
 	}

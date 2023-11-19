@@ -75,8 +75,6 @@ export class ChatGateway {
     this.server.sockets.sockets
       .get(this.ids.get(data.client_id))
       .join(this.toChatId(data.chat_id));
-
-    console.log(data);
   }
 
   @SubscribeMessage('sendMessage')
@@ -90,10 +88,7 @@ export class ChatGateway {
       content: data.content,
     });
 
-    console.log(this.server.sockets.adapter.rooms);
-
     this.server.to(this.toChatId(data.chat_id)).emit('receiveMessage', message);
-    console.log('sending message to chat', data.chat_id);
   }
 
   handleDisconnect(client: Socket) {

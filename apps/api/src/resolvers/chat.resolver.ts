@@ -26,7 +26,6 @@ export class ChatResolver {
     @Args('client_id2', { type: () => Int }) id2: number,
   ) {
     const id = await this.chats_service.getChatWithMembers([id1, id2]);
-    console.log('searching for pair', [id1, id2], 'res:', id);
     if (id) {
       return this.chats_service.getChat(id);
     }

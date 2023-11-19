@@ -27,7 +27,6 @@ function App() {
 
 	if (state === LoadingState.Fulfilled) {
 		localStorage.setItem(UESR_ID, current!.id.toString());
-		console.log("you are", current?.id);
 	}
 
 	if (state === LoadingState.Rejected) {
