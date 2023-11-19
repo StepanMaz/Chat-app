@@ -9,7 +9,7 @@
 	],
 	"scripts": {
 		"dev": "turbo run dev",
-		"start": "npm i & npm run services:up & npm run dev",
+		"start": "npm run services:up & npm run dev",
 		"start:prod": "echo \"should be implemented\"",
 		"services:up": "docker-compose --env-file .env up -d",
 		"services:down": "docker-compose --env-file .env down",
