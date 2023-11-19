@@ -1,4 +1,4 @@
-import { ChatConnection, GQLConnection } from "client-lib";
+import { ChatConnection, GQLConnection } from "client-lib/src";
 import { Bot, BotInfo } from "./bot";
 
 export class SpamBot extends Bot {
@@ -13,16 +13,14 @@ export class SpamBot extends Bot {
 		this.spam();
 	}
 
-	protected handleMessage(
-		message: { chat_id: number } & { content: string }
-	): void {}
+	protected handleMessage(message: any): void {}
 
 	protected handleStatusChaged(message: any): void {}
 
 	private spam() {
 		setTimeout(async () => {
 			const res = await this.gql_connection.query`query User {
-				user(id: ${this.bot_info.client_id}) {
+				user(id: ${this.bot_info.id}) {
 					chats {
 						id
 					}

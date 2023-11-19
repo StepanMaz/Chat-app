@@ -12,6 +12,11 @@ export class GQLConnection {
 		this.connection = new ApolloClient({
 			uri,
 			cache: new InMemoryCache(),
+			defaultOptions: {
+				query: {
+					fetchPolicy: "no-cache",
+				},
+			},
 		});
 	}
 

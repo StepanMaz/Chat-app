@@ -1,4 +1,4 @@
-import { ChatConnection } from "client-lib/index";
+import { ChatConnection } from "client-lib/src";
 import { ServerEvents } from "shared/types/sockets";
 
 export abstract class Bot {
@@ -6,8 +6,17 @@ export abstract class Bot {
 		protected readonly connection: ChatConnection,
 		public readonly bot_info: BotInfo
 	) {
-		connection.on("receiveMessage", this.handleMessage);
-		connection.on("statusChange", this.handleStatusChaged);
+		connection.on("receiveMessage", (m) => {
+			if (m.userId != bot_info.id) {
+				this.handleMessage(m);
+				console.log(
+					this.constructor.name,
+					"received a message",
+					bot_info,
+					(connection as any).socket.id
+				);
+			}
+		});
 	}
 
 	protected abstract handleMessage(
@@ -27,5 +36,5 @@ export abstract class Bot {
 }
 
 export interface BotInfo {
-	client_id: number;
+	id: number;
 }

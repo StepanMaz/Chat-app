@@ -1,10 +1,10 @@
-import { Bot } from "./bot";
+import type { Message } from "shared/types/models";
+import { Bot, BotInfo } from "./bot";
+import { ChatConnection } from "client-lib/src";
 
 export class EchoBot extends Bot {
 	protected handleStatusChaged(message: any): void {}
-	protected handleMessage(
-		message: { chat_id: number } & { content: string }
-	): void {
-		this.sendMessage(message.chat_id, message.content);
+	protected handleMessage(message: Message): void {
+		this.sendMessage(message.chatId, message.content);
 	}
 }

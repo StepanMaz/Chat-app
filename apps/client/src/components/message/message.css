@@ -1,0 +1,67 @@
+.message-container {
+    width: 70%;
+    float: left;
+    margin: 10px 20px;
+}
+
+.message-container * {
+    margin: 0;
+}
+
+.message-container[type="ingoing"] {
+    float: right;
+}
+
+.message-container>.message-username {
+    background-color: #becbd9;
+    justify-content: space-between;
+    display: flex;
+    border-radius: 7px 7px 0 0;
+    padding: 10px;
+    height: 30px;
+}
+
+.message-container[type="ingoing"]>.message-username {
+    background-color: #f0cbb3;
+}
+
+.message-container>.message-content {
+    background-color: #f4f8fb;
+    min-height: 40px;
+    border-radius: 0 0 7px 7px;
+    text-align: left;
+    padding: 10px;
+    position: relative;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.message-container>.message-content::before {
+    content: "";
+    position: absolute;
+    border-right: 10px solid #f4f8fb;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    width: 0px;
+    height: 0px;
+    left: 0%;
+    top: 50%;
+    transform: translateX(-100%) translateY(-50%);
+}
+
+.message-container[type="ingoing"]>.message-content::before {
+    content: none;
+}
+
+.message-container[type="ingoing"]>.message-content::after {
+    content: "";
+    position: absolute;
+    border-left: 10px solid #f4f8fb;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    width: 0px;
+    height: 0px;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+}

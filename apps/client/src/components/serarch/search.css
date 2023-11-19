@@ -1,0 +1,46 @@
+.search-container {
+    height: 100%;
+    position: relative;
+    background-color: white;
+}
+
+.tabs-container {
+    display: flex;
+}
+
+.tabs-container > button {
+    flex: 1;
+    height: 40px;
+    background-color: #f8f8f8;
+    border: none;
+}
+
+.tabs-container > button.active {
+    background-color: white;
+}
+
+.users-container {
+    overflow-y: scroll;
+    height: calc(100% - 100px);
+}
+
+.search-input {
+    position: absolute;
+    bottom: 20px;
+    left: 10%;
+    width: 100%;
+}
+
+.search-input > input {
+    border: none;
+    font-size: large;
+    height: 40px;
+    border-radius: 4pt;
+    padding: 10px;
+    width: 80%;
+}
+
+.search-input > input:focus {
+    outline: none;
+    box-shadow: 0 0 3pt 2pt #f4f8fb;
+}

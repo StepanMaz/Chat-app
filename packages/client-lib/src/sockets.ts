@@ -12,8 +12,8 @@ export class ChatConnection {
 		ToSocketIOEvents<ClientEvents>
 	>;
 
-	constructor(url: URL, auth: AuthData) {
-		this.socket = io(url, { query: { auth: auth } });
+	constructor(url: string, auth: AuthData) {
+		this.socket = io(url, { auth });
 		this.on = this.socket.on.bind(this.socket);
 		this.onAny = this.socket.onAny.bind(this.socket);
 		this.off = this.socket.off.bind(this.socket);

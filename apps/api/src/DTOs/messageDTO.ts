@@ -6,11 +6,17 @@ export class MessageDTO {
   @Field(() => ID)
   public id: number;
 
-  @Field((type) => ChatDTO)
-  public chat: ChatDTO;
+  @Field()
+  public chatId: number;
+
+  @Field()
+  public userId: number;
 
   @Field({ nullable: true })
   public seenAt: Date;
+
+  @Field()
+  public content: string;
 
   @Field()
   public createdAt: Date;

@@ -5,9 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToMany,
-  JoinTable,
   OneToMany,
-  Column,
 } from 'typeorm';
 
 import { Message, User } from '.';

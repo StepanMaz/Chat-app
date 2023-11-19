@@ -1,0 +1,20 @@
+.user-container {
+    height: 200px;
+    display: flex;
+    background-color: #becbd9;
+}
+
+.profile-pic {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.status-container {
+    margin-left: 10px;
+    padding: 20px;
+}
+
+.status-container > span {
+    font-size: 2em;
+}

@@ -1,16 +1,21 @@
+import { Message } from "../models";
+
 export type AuthData = {
 	client_id: number;
 };
 export type ServerEvents = {
 	//name: type
 	statusChange: ClientIDPayload & ClientStatusPayload;
-	receiveMessage: ChatIDPayload & MessagePayload;
-	channelMemebersUpdate: ChatIDPayload & MembersStatusUpdatePayload;
+	receiveMessage: Message;
+	bot_receiveMessage: Message;
+	chatMembersUpdate: ChatIDPayload & MembersStatusUpdatePayload;
 };
 export type ClientEvents = {
 	//name: type
 	startTyping: ChatIDPayload;
 	sendMessage: ChatIDPayload & MessagePayload;
+	joinChat: ChatIDPayload;
+	inviteToChat: ChatIDPayload & ClientIDPayload;
 };
 
 export type ToSocketIOEvents<T> = {

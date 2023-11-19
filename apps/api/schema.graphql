@@ -20,8 +20,10 @@ scalar DateTime
 
 type MessageDTO {
   id: ID!
-  chat: ChatDTO!
+  chatId: Float!
+  userId: Float!
   seenAt: DateTime
+  content: String!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -44,12 +46,15 @@ type NoChatsUserDTO {
 }
 
 type Query {
+  chat(id: Int!): ChatDTO!
   user(id: Int!): UserDTO!
-  findUser(username: String!): [NoChatsUserDTO!]!
+  findUser(username: String!, online: Boolean! = false): [NoChatsUserDTO!]!
   allUsers: [NoChatsUserDTO!]!
 }
 
 type Mutation {
   createChat(client_ids: [Int!]!): ChatDTO!
+  findChatWihtUserOrCreate(client_id1: Int!, client_id2: Int!): ChatDTO!
   cerateUser(username: String!, status: String!, image_base64: String!): UserDTO!
+  cerateDummyUser: UserDTO!
 }

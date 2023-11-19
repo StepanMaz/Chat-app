@@ -19,10 +19,26 @@ export class ChatsService {
   }
 
   getChat(id: number) {
-    return this.chats_repo.findOne({ where: { id } });
+    return this.chats_repo.findOne({
+      where: { id },
+      relations: ['members', 'messages'],
+    });
   }
 
   addMessage(message: MessageData) {
     return this.messages_repo.create(message).save();
+  }
+
+  async getChatWithMembers(userIds: number[]) {
+    return (
+      await this.chats_repo
+        .createQueryBuilder('chat')
+        .leftJoinAndSelect('chat.members', 'member')
+        .where(`member.id IN (${userIds.join(',')})`)
+        .groupBy('chat.id')
+        .having(`COUNT(DISTINCT member.id) = ${new Set(userIds).size}`)
+        .select('chat.id')
+        .getOne()
+    )?.id;
   }
 }

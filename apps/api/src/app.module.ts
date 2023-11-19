@@ -7,6 +7,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ResolversModule } from './resolvers/resolvers.module';
 
 import * as dotenv from 'dotenv';
+import { GatewayModule } from './gateways/gateway.module';
 dotenv.config();
 
 @Module({
@@ -26,6 +27,7 @@ dotenv.config();
       password: process.env.POSTGRES_PASSWORD,
     }),
     ResolversModule,
+    GatewayModule,
   ],
   controllers: [AppController],
   providers: [AppService],

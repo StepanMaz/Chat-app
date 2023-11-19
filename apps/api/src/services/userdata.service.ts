@@ -5,7 +5,7 @@ export class UserDataService {
   private profiles = new Map<number, UserData>();
 
   public isOnline(id: number) {
-    const profile = this.profiles.get(id);
+    const profile = this.profiles.get(+id);
     return Boolean(profile) && profile.is_online;
   }
 
@@ -18,19 +18,19 @@ export class UserDataService {
   }
 
   public hasProfile(id: number) {
-    return this.profiles.has(id);
+    return this.profiles.has(+id);
   }
 
   public getProfile(id: number) {
-    return this.profiles.get(id);
+    return this.profiles.get(+id);
   }
 
   public createProfile(id: number, data?: Partial<UserData>) {
-    this.profiles.set(id, Object.assign({ is_online: false }, data));
+    this.profiles.set(+id, Object.assign({ is_online: false }, data));
   }
 
   public deleteProfile(id: number) {
-    this.profiles.delete(id);
+    this.profiles.delete(+id);
   }
 }
 

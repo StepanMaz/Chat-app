@@ -9,6 +9,8 @@ import {
 } from '@nestjs/graphql';
 import { NoChatsUserDTO, UserDTO } from 'src/DTOs';
 import { UsersService, UserDataService } from 'src/services';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 @Resolver((of) => UserDTO)
 export class UsersResolver {
@@ -44,9 +46,29 @@ export class UsersResolver {
     return user;
   }
 
+  @Mutation((returns) => UserDTO)
+  async cerateDummyUser() {
+    const user = await this.user_service.create({
+      username: 'Username' + Math.round(Math.random() * 10000),
+      status: '',
+      image_base64:
+        'data:image/avif;base64, ' +
+        readFileSync(join(__dirname, '../../assets/cat.avif'), {
+          encoding: 'base64',
+        }),
+    });
+    return user;
+  }
+
   @Query((returns) => [NoChatsUserDTO])
-  async findUser(@Args('username') username: string) {
-    return this.user_service.find(username);
+  async findUser(
+    @Args('username') username: string,
+    @Args('online', { type: () => Boolean, defaultValue: false })
+    online: boolean,
+  ) {
+    const data = this.user_service.find(username);
+    if (!online) return data;
+    return (await data).filter((u) => this.userdata_service.isOnline(u.id));
   }
 
   @Query((returns) => [NoChatsUserDTO])
