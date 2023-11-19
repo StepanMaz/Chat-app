@@ -54,7 +54,6 @@ const app_slice = createSlice({
 			.addCase(getChatWithUser.fulfilled, (state, res) => {
 				state.chat_state = LoadingState.Fulfilled;
 				state.chat = res.payload.data.findChatWihtUserOrCreate;
-				console.log(state.chat);
 			});
 	},
 });

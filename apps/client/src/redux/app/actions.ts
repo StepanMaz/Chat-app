@@ -9,7 +9,6 @@ export const getChatWithUser = createAsyncThunk(
 		{ extra: { gql_connection }, getState }: GetThunkAPI<AsyncThunkConfig>
 	) => {
 		const user = getState().user.current;
-		console.log(client_id, user?.id, "searching for chat with");
 		if (!user) return Promise.reject("No current user");
 
 		return gql_connection.query`
